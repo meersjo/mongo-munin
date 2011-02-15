@@ -1,6 +1,6 @@
 
 #%# family=auto
-#%# capabilities=autoconf suggest
+#%# capabilities=autoconf
 
 import urllib2
 import sys
