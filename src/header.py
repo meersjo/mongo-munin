@@ -21,6 +21,6 @@ def doAutoConf():
         raw = urllib2.urlopen( "http://%s:%d/_status" % (host, port) ).read()
         print "yes"
         return True
-    except urllib2.URLError:
-        print "no"
+    except urllib2.URLError as detail:
+        print "no (", detail, ")"
         return False
