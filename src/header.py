@@ -1,4 +1,7 @@
 
+#%# family=auto
+#%# capabilities=autoconf suggest
+
 import urllib2
 import sys
 import os
