@@ -5,9 +5,9 @@ do
     echo $out
     x=${out#src/body_}
     x=${x%.py}
-    
+
     out=mongo_$x
-    
+
     if type "python26" &>/dev/null; then
         echo "#!/usr/bin/env python26" > $out
     else
@@ -17,7 +17,7 @@ do
             echo "#!/usr/bin/env python" > $out
         fi
     fi
-    
+
     echo "" >> $out
     echo "## GENERATED FILE - DO NOT EDIT" >> $out
     cat src/header.py >> $out

@@ -1,13 +1,21 @@
 
-name = "locked"
+collection_name = "set your collection name"
+
+def get():
+    return getServerStatus()["locks"][collection_name]["timeLockedMicros"]
 
 def doData():
-    print name + ".value " + str( 100 * getServerStatus()["globalLock"]["ratio"] )
+    for k,v in get().iteritems():
+        print( str(k) + ".value " + str(int(v)) )
 
 def doConfig():
-    print "graph_title MongoDB write lock percentage"
+    print "graph_title MongoDB collection_name write lock time"
     print "graph_args --base 1000 -l 0 "
     print "graph_vlabel percentage"
     print "graph_category MongoDB"
 
-    print name + ".label " + name
+    for k in get():
+        print k + ".label " + k
+        print k + ".min 0"
+        print k + ".type COUNTER"
+        print k + ".draw LINE1"

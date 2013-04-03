@@ -1,6 +1,6 @@
 
 def get():
-    return getServerStatus()["indexCounters"]["btree"]
+    return getServerStatus()["indexCounters"]
 
 def doData():
     for k,v in get().iteritems():
