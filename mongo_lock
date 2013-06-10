@@ -1,4 +1,4 @@
-#!/usr/bin/env python26
+#!/usr/bin/env python
 
 ## GENERATED FILE - DO NOT EDIT
 
@@ -32,6 +32,7 @@ def doAutoConf():
         return False
 
 collection_name = "set your collection name"
+collection_name = "."
 
 def get():
     return getServerStatus()["locks"][collection_name]["timeLockedMicros"]
@@ -41,7 +42,7 @@ def doData():
         print( str(k) + ".value " + str(int(v)) )
 
 def doConfig():
-    print "graph_title MongoDB collection_name write lock time"
+    print "graph_title MongoDB " + collection_name + " write lock time"
     print "graph_args --base 1000 -l 0 "
     print "graph_vlabel percentage"
     print "graph_category MongoDB"
