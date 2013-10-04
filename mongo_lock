@@ -31,7 +31,8 @@ def getServerStatus():
 name = "locked"
 
 def doData():
-    print name + ".value " + str( 100 * getServerStatus()["globalLock"]["ratio"] )
+    data = getServerStatus()
+    print name + ".value " + str( 100.0 * data["globalLock"]["lockTime"]  / data["globalLock"]["globalTime"] )
 
 def doConfig():
 
@@ -41,7 +42,8 @@ def doConfig():
     print "graph_category MongoDB"
 
     print name + ".label " + name
-
+    print name + ".type DERIVE"
+    print name + ".min 0"
 
 
 
