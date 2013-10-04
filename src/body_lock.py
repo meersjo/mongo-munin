@@ -3,7 +3,7 @@ name = "locked"
 
 def doData():
     data = getServerStatus()
-    print name + ".value " + str( 100.0 * data["globalLock"]["lockTime"]  / data["globalLock"]["globalTime"] )
+    print name + ".value " + str( data["globalLock"]["lockTime"] )
 
 def doConfig():
     print "graph_title MongoDB write lock percentage"
@@ -13,4 +13,3 @@ def doConfig():
 
     print name + ".label " + name
     print name + ".type DERIVE"
-    print name + ".min 0"

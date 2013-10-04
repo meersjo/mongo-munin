@@ -32,10 +32,9 @@ name = "locked"
 
 def doData():
     data = getServerStatus()
-    print name + ".value " + str( 100.0 * data["globalLock"]["lockTime"]  / data["globalLock"]["globalTime"] )
+    print name + ".value " + str( data["globalLock"]["lockTime"] )
 
 def doConfig():
-
     print "graph_title MongoDB write lock percentage"
     print "graph_args --base 1000 -l 0 "
     print "graph_vlabel percentage"
@@ -43,11 +42,6 @@ def doConfig():
 
     print name + ".label " + name
     print name + ".type DERIVE"
-    print name + ".min 0"
-
-
-
-
 
 if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == "config":
