@@ -19,7 +19,6 @@ def doData():
     print('secs_behind.value %i' % secs_behind)
 
 def doConfig():
-    host, port = extractHostPort()
     ss = getServerRequest('replSetGetStatus')
 
     # On non-replication servers we get an errmsg
