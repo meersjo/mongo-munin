@@ -14,7 +14,7 @@ def doData():
         if member['stateStr'] == 'PRIMARY':
             primary = member
 
-    secs_behind = primary['optime']['t'] - me['optime']['t']
+    secs_behind = primary['optime']['$timestamp']['t'] - me['optime']['$timestamp']['t']
       
     print('secs_behind.value %i' % secs_behind)
 
