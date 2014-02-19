@@ -19,7 +19,7 @@ def extractHostPort():
 
 def getServerRequest(action):
     host, port = extractHostPort()
-    url = "http://%s:%s/_status" % (host, port)
+    url = "http://%s:%s/%s" % (host, port, action)
     req = urllib2.Request(url)
     raw = urllib2.urlopen(req).read()
     return json.loads( raw )
