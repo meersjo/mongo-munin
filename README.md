@@ -2,6 +2,8 @@
 Munin Plugins for MongoDB
 ============
 
+[http://docs.mongodb.org/manual/reference/server-status/](http://docs.mongodb.org/manual/reference/server-status/)
+
 Plugins
 ----------
 * mongo_ops          : operations/second

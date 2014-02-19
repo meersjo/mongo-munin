@@ -1,13 +1,12 @@
 
 def get():
-    return getServerStatus()["indexCounters"]["btree"]
+    return getServerStatus()["indexCounters"]
 
 def doData():
     for k,v in get().iteritems():
         print( str(k) + ".value " + str(int(v)) )
 
 def doConfig():
-
     print "graph_title MongoDB btree stats"
     print "graph_args --base 1000 -l 0"
     print "graph_vlabel mb ${graph_period}"
@@ -19,8 +18,3 @@ def doConfig():
         print k + ".type COUNTER"
         print k + ".max 500000"
         print k + ".draw LINE1"
-
-
-
-
-
