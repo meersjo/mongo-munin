@@ -35,9 +35,8 @@ def doData():
         print( str(k) + ".value " + str(v) )
 
 def doConfig():
-    host, port = extractHostPort()
 
-    print "graph_title MongoDB ops (%s:%s)" % (host, port)
+    print "graph_title MongoDB ops"
     print "graph_args --base 1000 -l 0"
     print "graph_vlabel ops / ${graph_period}"
     print "graph_category MongoDB"
