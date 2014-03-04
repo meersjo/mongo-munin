@@ -27,7 +27,7 @@ def doConfig():
 
     set = ss['set']
 
-    print "graph_title MongoDB %s lag" % (set, host, port)
+    print "graph_title MongoDB %s lag" % set
     print "graph_category MongoDB"
     print "graph_vlabel seconds"
     print "graph_args -l 0"
