@@ -24,9 +24,11 @@ def doConfig():
         exit(1)
 
     set = ss['set']
+    count = len(ss["members"])
 
     print 'graph_title MongoDB %s current primary' % set
     print 'graph_category MongoDB'
     print 'graph_vlabel Member ID'
+    print 'graph_args -l %d' % count
     print 'primary.label Current primary'
 
