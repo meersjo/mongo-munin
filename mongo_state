@@ -1,0 +1,77 @@
+#!/usr/bin/env python
+
+## GENERATED FILE - DO NOT EDIT
+
+#%# family=auto
+#%# capabilities=autoconf
+
+import urllib2
+import sys
+import os
+
+try:
+    import json
+except ImportError:
+    import simplejson as json
+
+host = os.environ.get('HOST', '127.0.0.1')
+port = os.environ.get('PORT', 28017)
+
+def getServerRequest(action):
+    url = "http://%s:%s/%s" % (host, port, action)
+    req = urllib2.Request(url)
+    raw = urllib2.urlopen(req).read()
+    return json.loads( raw )
+
+def getServerStatus():
+    return getServerRequest('_status')['serverStatus']
+
+def doAutoConf():
+    try:
+        raw = urllib2.urlopen( "http://%s:%d/_status" % (host, port) ).read()
+        print "yes"
+        return True
+    except urllib2.URLError as detail:
+        print "no (", detail, ")"
+        return False
+
+
+def doData():
+    ss = getServerRequest('replSetGetStatus')
+
+    # On non-replication servers we get an errmsg
+    if ss.get('errmsg', False):
+        exit(1)
+
+    members = ss["members"]
+    for _, member in enumerate(members):
+      name = member['name'].split(':')[0]
+      state = member['state']
+      print '%s.value %d' % (name, state)
+
+
+def doConfig():
+    ss = getServerRequest('replSetGetStatus')
+
+    # On non-replication servers we get an errmsg
+    if ss.get('errmsg', False):
+        exit(1)
+
+    set = ss['set']
+
+    print 'graph_title MongoDB %s member state' % set
+    print 'graph_category MongoDB'
+    print 'graph_vlabel state'
+
+    for _, member in enumerate(ss['members']):
+      name = member['name'].split(':')[0]
+      print '%s.label %s' % (name, name)
+
+
+if __name__ == "__main__":
+    if len(sys.argv) > 1 and sys.argv[1] == "autoconf":
+        doAutoConf()
+    elif len(sys.argv) > 1 and sys.argv[1] == "config":
+        doConfig()
+    else:
+        doData()
