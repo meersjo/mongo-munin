@@ -37,15 +37,18 @@ def doAutoConf():
 
 names = [ "locked_read", "locked_write", "acquiring_read", "acquiring_write" ]
 
+def getSubKeyValue(dataDict, dbName, recordName, mode):
+    return int(dataDict[dbName][recordName].get(mode).get('$numberLong', 0)) if type(dataDict[dbName][recordName].get(mode)) == dict else dataDict[dbName][recordName].get(mode, 0)
+
 def doData():
     data = getServerStatus()['locks']
     totals = { 'locked': { 'read': 0, 'write': 0 }, 'acquiring': { 'read': 0, 'write': 0 } }
 
     for key in data:
-      totals['locked']['read'] += data[key]['timeLockedMicros'].get('r', 0)
-      totals['locked']['write'] += data[key]['timeLockedMicros'].get('w', 0)
-      totals['acquiring']['read'] += data[key]['timeAcquiringMicros'].get('r', 0)
-      totals['acquiring']['write'] += data[key]['timeAcquiringMicros'].get('w', 0)
+      totals['locked']['read'] += getSubKeyValue(data, key, 'timeLockedMicros', 'r')
+      totals['locked']['write'] += getSubKeyValue(data, key, 'timeLockedMicros', 'w')
+      totals['acquiring']['read'] += getSubKeyValue(data, key, 'timeAcquiringMicros', 'r')
+      totals['acquiring']['write'] += getSubKeyValue(data, key, 'timeAcquiringMicros', 'w')
 
     print names[0] + ".value " + str( totals['locked']['read'] )
     print names[1] + ".value " + str( totals['locked']['write'] )
